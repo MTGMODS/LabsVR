@@ -6144,6 +6144,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "XR Interaction Simulator \u2022 Lab 7"
       objectReference: {fileID: 0}
+    - target: {fileID: 8135023674665499069, guid: 58d0a4ac86f2348deb02f3880c71378e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8518324294302271954, guid: 58d0a4ac86f2348deb02f3880c71378e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -29696,7 +29700,7 @@ SceneRoots:
   - {fileID: 384640658}
   - {fileID: 1216837358}
   - {fileID: 1435138117}
+  - {fileID: 1325428407}
   - {fileID: 1052009629}
   - {fileID: 1423204620}
-  - {fileID: 1325428407}
   - {fileID: 364489686}
