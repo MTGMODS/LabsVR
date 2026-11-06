@@ -6,6 +6,8 @@ public sealed class Lab7RayFeedback : MonoBehaviour
 {
     public enum Response { CycleColor, ToggleBeacon, Pulse }
 
+    static readonly Color PulseColor = new Color(1f, 0.05f, 0.8f, 1f);
+
     [SerializeField] Response response;
     [SerializeField] Renderer targetRenderer;
     [SerializeField] Light beacon;
@@ -21,7 +23,11 @@ public sealed class Lab7RayFeedback : MonoBehaviour
     {
         initialScale = transform.localScale;
         if (targetRenderer != null)
+        {
             initialColor = targetRenderer.material.color;
+            if (response == Response.Pulse)
+                targetRenderer.material.color = PulseColor;
+        }
         if (beacon != null)
             beaconOn = beacon.enabled;
     }
@@ -40,10 +46,12 @@ public sealed class Lab7RayFeedback : MonoBehaviour
                 if (beacon == null) return;
                 beaconOn = !beaconOn;
                 beacon.enabled = beaconOn;
+                if (targetRenderer != null)
+                    targetRenderer.material.color = beaconOn ? new Color(1f, 0.25f, 0.02f, 1f) : initialColor;
                 break;
             case Response.Pulse:
                 pulsed = !pulsed;
-                transform.localScale = initialScale * (pulsed ? 1.2f : 1f);
+                transform.localScale = initialScale * (pulsed ? 1.5f : 1f);
                 break;
         }
     }
