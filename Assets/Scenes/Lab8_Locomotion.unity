@@ -29843,24 +29843,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DefaultParameters:
-    m_ApertureSize: 0.7
-    m_FeatheringEffect: 0.2
+    m_ApertureSize: 0.9
+    m_FeatheringEffect: 0.35
     m_EaseInTime: 0.3
     m_EaseOutTime: 0.3
     m_EaseInTimeLock: 0
     m_EaseOutDelayTime: 0
-    m_VignetteColor: {r: 0, g: 0, b: 0, a: 1}
-    m_VignetteColorBlend: {r: 0, g: 0, b: 0, a: 1}
+    m_VignetteColor: {r: 0, g: 0, b: 0, a: 0.65}
+    m_VignetteColorBlend: {r: 0, g: 0, b: 0, a: 0.65}
     m_ApertureVerticalPosition: 0
   m_CurrentParameters:
-    m_ApertureSize: 0.7
-    m_FeatheringEffect: 0.2
+    m_ApertureSize: 0.9
+    m_FeatheringEffect: 0.35
     m_EaseInTime: 0.3
     m_EaseOutTime: 0.3
     m_EaseInTimeLock: 0
     m_EaseOutDelayTime: 0
-    m_VignetteColor: {r: 0, g: 0, b: 0, a: 1}
-    m_VignetteColorBlend: {r: 0, g: 0, b: 0, a: 1}
+    m_VignetteColor: {r: 0, g: 0, b: 0, a: 0.65}
+    m_VignetteColorBlend: {r: 0, g: 0, b: 0, a: 0.65}
     m_ApertureVerticalPosition: 0
   m_LocomotionVignetteProviders:
   - m_LocomotionProvider: {fileID: 810000000000000002}
