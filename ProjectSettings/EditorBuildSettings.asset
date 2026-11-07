@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lab8_Locomotion.unity
     guid: 85131bc53d264f818c6eaa423a2885c8
+  - enabled: 1
+    path: Assets/Scenes/Lab9_Lighting.unity
+    guid: 58453356df90b234daa5fea6f5a0198d
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: f2f264d2444e8b8458043341235c7891, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}
