@@ -13603,6 +13603,10 @@ PrefabInstance:
       propertyPath: m_MoveSpeed
       value: 1.6
       objectReference: {fileID: 0}
+    - target: {fileID: 153982007679157697, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_RightHandMoveInput.m_InputSourceMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 308999861788949463, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -13687,6 +13691,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2449787133337329425, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_InteractionManager
+      value: 
+      objectReference: {fileID: 1351614586}
     - target: {fileID: 2717550568034688974, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -13735,6 +13743,10 @@ PrefabInstance:
       propertyPath: m_StepOffset
       value: 0.23
       objectReference: {fileID: 0}
+    - target: {fileID: 6480925242510836759, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6678509202150728127, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: 'm_StartingGroupMembers.Array.data[0]'
       value: 
@@ -13751,6 +13763,10 @@ PrefabInstance:
       propertyPath: 'm_StartingInteractionOverridesMap.Array.data[0].overrideGroupMembers.Array.data[0]'
       value: 
       objectReference: {fileID: 1201574978}
+    - target: {fileID: 7347985736721345035, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_LeftHandTurnInput.m_InputSourceMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8559622106701032237, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -13759,22 +13775,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 153982007679157697, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
-      propertyPath: m_RightHandMoveInput.m_InputSourceMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7347985736721345035, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
-      propertyPath: m_LeftHandTurnInput.m_InputSourceMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6480925242510836759, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2449787133337329425, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
-      propertyPath: m_InteractionManager
-      value:
-      objectReference: {fileID: 1351614586}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 1319746308, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
@@ -14157,7 +14157,7 @@ GameObject:
   - component: {fileID: 1052009629}
   - component: {fileID: 1052009630}
   m_Layer: 0
-  m_Name: "07 \u2022 \u041E\u0441\u0432\u0456\u0442\u043B\u0435\u043D\u043D\u044F"
+  m_Name: "Lab9 - \u041E\u0441\u0432\u0456\u0442\u043B\u0435\u043D\u043D\u044F"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29700,8 +29700,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b1e8c997df241c1a67045eeac79b41b, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &810000000000000010
 GameObject:
   m_ObjectHideFlags: 0
@@ -29712,7 +29712,7 @@ GameObject:
   m_Component:
   - component: {fileID: 810000000000000011}
   m_Layer: 0
-  m_Name: Lab 8 - Teleport route
+  m_Name: "08 \u2022  Teleport route"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31570,7 +31570,7 @@ SceneRoots:
   - {fileID: 1216837358}
   - {fileID: 1435138117}
   - {fileID: 1325428407}
+  - {fileID: 810000000000000011}
   - {fileID: 1052009629}
   - {fileID: 1423204620}
   - {fileID: 364489686}
-  - {fileID: 810000000000000011}
