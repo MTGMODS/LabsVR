@@ -40437,6 +40437,7 @@ MeshRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1052009629}
   - {fileID: 1396314747}
   - {fileID: 58969689}
   - {fileID: 1386489036}
@@ -40445,7 +40446,6 @@ SceneRoots:
   - {fileID: 1435138117}
   - {fileID: 1325428407}
   - {fileID: 810000000000000011}
-  - {fileID: 1052009629}
   - {fileID: 188241192}
   - {fileID: 1423204620}
   - {fileID: 364489686}
