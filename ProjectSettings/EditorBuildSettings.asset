@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Lab11_WorldSpaceUI.unity
+    guid: 1b0fe50e40a044e6957e6cded0a4d678
+  - enabled: 1
     path: Assets/Scenes/Lab10_SpatialAudio.unity
     guid: 0618e61af26b473cade654c7e8ba320f
   - enabled: 0
