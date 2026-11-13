@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit.Inputs.Readers;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion;
 using UnityEngine.XR.Interaction.Toolkit.UI;
 
@@ -32,6 +33,7 @@ public sealed class Lab11Interface : MonoBehaviour
     {
         if (playerCamera == null) playerCamera = Camera.main;
         if (mainMenu == null) CreateInterface();
+        ApplyVideoRequirements();
         foreach (var ray in FindObjectsByType<XRRayInteractor>(FindObjectsInactive.Include))
         {
             // Лише звичайний промінь керує UI; телепортаційний залишається для підлоги.
@@ -82,7 +84,52 @@ public sealed class Lab11Interface : MonoBehaviour
         wallButton.transform.position = new Vector3(-3f, 1.6f, 17.84f);
         wallButton.transform.rotation = Quaternion.identity;
         AddButton(wallButton.transform, "ІНФОРМАЦІЯ\nПРО ПАВІЛЬЙОН", Vector2.zero, new Vector2(650, 240), ShowPavilionInfo, font);
+        ApplyVideoRequirements();
         PlaceInFront(mainMenu);
+    }
+
+    // Оновлює наявні об'єкти без перестворення кнопок, шрифтів та їхніх подій.
+    public void ApplyVideoRequirements()
+    {
+        if (mainMenu != null)
+        {
+            var menuRect = (RectTransform)mainMenu.transform;
+            menuRect.sizeDelta = new Vector2(800f, 600f);
+            menuRect.localScale = Vector3.one * .001f; // 800×600 пікселів = 80×60 см.
+            int labelIndex = 0;
+            int buttonIndex = 0;
+            foreach (Transform child in mainMenu.transform)
+            {
+                var rect = (RectTransform)child;
+                if (child.name == "Фон панелі")
+                {
+                    rect.sizeDelta = menuRect.sizeDelta;
+                    child.GetComponent<Image>().color = new Color(.1f, .1f, .15f, .95f);
+                }
+                else if (child.TryGetComponent<Text>(out var label))
+                {
+                    bool heading = labelIndex++ == 0;
+                    rect.anchoredPosition = new Vector2(0f, heading ? 205f : 135f);
+                    rect.sizeDelta = new Vector2(740f, heading ? 100f : 45f);
+                    label.fontSize = heading ? 36 : 24;
+                }
+                else if (child.TryGetComponent<Button>(out var button))
+                {
+                    rect.anchoredPosition = new Vector2(0f, 40f - buttonIndex++ * 120f);
+                    rect.sizeDelta = new Vector2(600f, 90f);
+                    button.GetComponentInChildren<Text>(true).fontSize = 36;
+                }
+            }
+        }
+        foreach (var ray in FindObjectsByType<XRRayInteractor>(FindObjectsInactive.Include))
+        {
+            // Дальність телепортації з лабораторної №8 залишається окремою.
+            if (ray.name.Contains("Teleport")) continue;
+            ray.maxRaycastDistance = 10f;
+            ray.enableUIInteraction = true;
+            var visual = ray.GetComponent<XRInteractorLineVisual>();
+            if (visual != null) visual.lineWidth = .015f;
+        }
     }
 
     const string PavilionDescription = "Призначення: виставка архітектури та будівельних матеріалів.\n\nУ павільйоні дві зали: майстерня матеріалів і галерея архітектури.\n\nТут можна оглянути моделі будівель, порівняти поверхні та перенести зразки між різними зонами освітлення.";
@@ -142,7 +189,9 @@ public sealed class Lab11Interface : MonoBehaviour
         if (playerCamera == null) return;
         Vector3 forward = Vector3.ProjectOnPlane(playerCamera.transform.forward, Vector3.up).normalized;
         if (forward.sqrMagnitude < .01f) forward = Vector3.forward;
-        canvas.transform.position = playerCamera.transform.position + forward * 2.2f;
+        Vector3 position = playerCamera.transform.position + forward * 2f;
+        if (canvas == mainMenu) position.y = 1.5f;
+        canvas.transform.position = position;
         canvas.transform.rotation = Quaternion.LookRotation(forward, Vector3.up);
     }
 

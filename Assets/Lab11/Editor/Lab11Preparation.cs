@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using Unity.XR.CoreUtils;
 using UnityEngine.XR.Interaction.Toolkit.UI;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals;
 
 // Лише ручний запуск: не відкриває Unity та не перехоплює керування під час імпорту.
 public static class Lab11Preparation
@@ -27,15 +28,27 @@ public static class Lab11Preparation
         origin.name = "XR Origin • Lab11";
         origin.transform.SetPositionAndRotation(new Vector3(0f, .1f, -38f), Quaternion.identity);
         controller.CreateInterface();
+        controller.ApplyVideoRequirements();
         var menu = controller.GetComponentsInChildren<Canvas>(true).Single(x => x.name.StartsWith("01 •"));
-        menu.transform.SetPositionAndRotation(origin.Camera.transform.position + Vector3.forward * 2.2f, Quaternion.identity);
+        menu.transform.SetPositionAndRotation(new Vector3(origin.transform.position.x, 1.5f, origin.transform.position.z + 2f), Quaternion.identity);
 
         controller.SetClickSound(AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Lab10/Audio/03_Building_chime_085s.wav"));
         var eventSystems = UnityEngine.Object.FindObjectsByType<EventSystem>();
         if (eventSystems.Length != 1 || eventSystems[0].GetComponent<XRUIInputModule>() == null)
             throw new InvalidOperationException("Потрібен один EventSystem з XR UI Input Module.");
-        foreach (var ray in UnityEngine.Object.FindObjectsByType<XRRayInteractor>())
-            if (!ray.name.Contains("Teleport")) { ray.enableUIInteraction = true; EditorUtility.SetDirty(ray); }
+        foreach (var ray in UnityEngine.Object.FindObjectsByType<XRRayInteractor>(FindObjectsInactive.Include))
+            if (!ray.name.Contains("Teleport"))
+            {
+                ray.enableUIInteraction = true;
+                EditorUtility.SetDirty(ray);
+                PrefabUtility.RecordPrefabInstancePropertyModifications(ray);
+                var visual = ray.GetComponent<XRInteractorLineVisual>();
+                if (visual != null)
+                {
+                    EditorUtility.SetDirty(visual);
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(visual);
+                }
+            }
         if (!AssetDatabase.IsValidFolder("Assets/Scenes/Lab11_WorldSpaceUI"))
             AssetDatabase.CreateFolder("Assets/Scenes", "Lab11_WorldSpaceUI");
         if (Lightmapping.lightingDataAsset != null)
@@ -72,7 +85,16 @@ public static class Lab11Preparation
         foreach (var button in buttons)
             if (button.onClick.GetPersistentEventCount() != 1)
                 throw new InvalidOperationException("Подію не підключено: " + button.name);
-        File.WriteAllText("Temp/Lab11UnityValidation.txt", "PASS: 3 World Space Canvas, 5 wired buttons, XR UI Input Module.\nRuntime interaction test required.\n");
+        var rect = (RectTransform)menu.transform;
+        if (Vector2.Distance(rect.sizeDelta, new Vector2(800, 600)) > .01f ||
+            Vector3.Distance(rect.localScale, Vector3.one * .001f) > .00001f ||
+            Mathf.Abs(menu.transform.position.y - 1.5f) > .01f ||
+            Mathf.Abs(menu.transform.position.z - origin.transform.position.z - 2f) > .01f)
+            throw new InvalidOperationException("Розмір або розташування головного меню не відповідає вимогам.");
+        foreach (var ray in UnityEngine.Object.FindObjectsByType<XRRayInteractor>(FindObjectsInactive.Include))
+            if (!ray.name.Contains("Teleport") && (!ray.enableUIInteraction || Mathf.Abs(ray.maxRaycastDistance - 10f) > .01f))
+                throw new InvalidOperationException("Перевірте UI-промінь: " + ray.name);
+        File.WriteAllText("Temp/Lab11UnityValidation.txt", "PASS: 3 World Space Canvas, 5 wired buttons, XR UI Input Module.\nPASS: Main menu 800x600, scale 0.001 = 0.8x0.6 m, height 1.5 m, distance 2 m.\nPASS: UI rays enabled, distance 10 m.\nRuntime interaction test required.\n");
         Debug.Log("Lab11: інтерфейс збережено, статична перевірка пройшла.");
     }
 }
